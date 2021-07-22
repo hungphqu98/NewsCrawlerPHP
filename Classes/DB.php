@@ -35,7 +35,6 @@ class Data extends DB {
 
   public function insert($data) {
     $string = "INSERT INTO news (" . implode(",",array_keys($data)) . ") VALUES ('" . implode("','", array_values($data)) . "')";
-    return $string;
     if (mysqli_query($this->connect(),$string)) {
       return true;
     } else {

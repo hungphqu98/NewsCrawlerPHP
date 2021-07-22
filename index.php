@@ -27,18 +27,17 @@
 
   <?php 
 
-  $data = new Data();
-
-
   if ($_POST) {
+  $data = new Data();
   $curl = new Curl();
   $curl->init();
   $curl->getUrl($_POST['url'])->method('GET')->setOptArray();
+
   $parse = new Parser($curl);
   $router = new Router($parse, $curl);
   $result = $router->routing();
 
-  echo $data->insert($result);
+  $data->insert($result);
   
   $curl->close();
   }

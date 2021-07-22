@@ -29,7 +29,7 @@ class Parser {
       $arr = array(
         'title' => $title,
         'content' => $content,
-        'pubDate' => $date
+        'date' => $date
       );
       return $arr;
   }
@@ -53,7 +53,6 @@ class vnnParser extends Parser {
   public function printTitle($news) {
 
     $q = $news->query("//*[@class='title f-22 c-3e']");
-    
     $title = $q->item(0)->nodeValue;
     // echo 'Title: '. $title;
     return $title;
@@ -74,7 +73,11 @@ class vnnParser extends Parser {
   public function printDate($news) {
 
     $q = $news->query("//*[@class='ArticleDate']");
-    $date = $q->item(0)->nodeValue;
+    $dateString = $q->item(0)->nodeValue;
+    preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
+    preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
+    $date = $day[0]. " " .$time[0];
+    var_dump($date);
     // echo 'Date: '.$date;
     return $date;
     
@@ -100,7 +103,7 @@ class vneParser extends Parser {
 
     $q = $news->query("//*[@class='title-detail']");
     $title = $q->item(0)->nodeValue;
-    echo 'Title: '. $title;
+    // echo 'Title: '. $title;
     return $title;
 
   }
@@ -110,11 +113,10 @@ class vneParser extends Parser {
 
     $q = $news->query("//*[@class='Normal']");
     $content = $q[0]->nodeValue;
-    echo "Content: ";
     foreach ($q as $s) {
-      echo $s->nodeValue;
-      echo "<br/>";
+      $content .= $s->nodeValue;
     }
+    // var_dump($content);
     return $content;
     
   }
@@ -123,8 +125,12 @@ class vneParser extends Parser {
   public function printDate($news) {
 
     $q = $news->query("//*[@class='date']");
-    $date = $q->item(0)->nodeValue;
-    echo 'Date: '.$date;
+    $dateString = $q->item(0)->nodeValue;
+    preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
+    preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
+    $date = $day[0]. " " .$time[0];
+    var_dump($date);
+    // echo 'Date: '.$date;
     return $date;
   }
 
@@ -148,7 +154,7 @@ class dtParser extends Parser {
 
     $q = $news->query("//*[@class='dt-news__title']");
     $title = $q->item(0)->nodeValue;
-    echo 'Title: '. $title;
+    // echo 'Title: '. $title;
     return $title;
 
   }
@@ -158,7 +164,7 @@ class dtParser extends Parser {
 
     $q = $news->query("//*[@class='dt-news__content']");
     $content = $q->item(0)->nodeValue;
-    echo 'Content: '.$content;
+    // echo 'Content: '.$content;
     return $content;
 
   }
@@ -167,8 +173,12 @@ class dtParser extends Parser {
   public function printDate($news) {
 
     $q = $news->query("//*[@class='dt-news__time']");
-    $date = $q->item(0)->nodeValue;
-    echo 'Date: '.$date;
+    $dateString = $q->item(0)->nodeValue;
+    preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
+    preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
+    $date = $day[0]. " " .$time[0];
+    var_dump($date);
+    // echo 'Date: '.$date;
     return $date;
     
   }
