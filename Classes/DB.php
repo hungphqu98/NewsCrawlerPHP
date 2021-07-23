@@ -7,6 +7,7 @@ class DB {
   private $password;
   private $dbname;
 
+  // Connect to database 
   protected function connect() {
       $this->server = 'localhost';
       $this->username = 'hungphqu';
@@ -14,6 +15,10 @@ class DB {
       $this->dbname = 'newsdb';
 
       $conn = new mysqli($this->server, $this->username, $this->password, $this->dbname);
+      if ($conn -> connect_errno) {
+        echo "Failed to connect to MySQL: " . $conn -> connect_error;
+        exit();
+      }
       $conn -> set_charset("utf8");
       return $conn;
     }
@@ -23,7 +28,7 @@ class DB {
 class Data extends DB {
 
   public function getAll() {
-    $sql = "SELECT * FROM test";
+    $sql = "SELECT * FROM news";
     $result = $this->connect()->query($sql);
     $numRows = $result->num_rows;
     if ($numRows > 0) {
@@ -34,6 +39,7 @@ class Data extends DB {
     }
   }
 
+  // Insert to db
   public function insert($data) {
     $string = "INSERT INTO news (" . implode(",",array_keys($data)) . ") VALUES ('" . implode("','", array_values($data)) . "')";
     if (mysqli_query($this->connect(),$string)) {
@@ -41,10 +47,7 @@ class Data extends DB {
       echo "<strong>Data added to database!</strong>";
       return true;
     } else {
-      echo "Wrong";
-      echo $this->connect()->connect_error;
-      echo $this->connect->connect_error;
-      echo $this->connect->error;
+      echo "Cannot add to database";
     }
   }
 }
