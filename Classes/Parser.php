@@ -22,9 +22,9 @@ class Parser {
 
       $news = $this->htmlParse();
       $title = $this->printTitle($news);
-      // echo '<br>';
+      echo '<br>';
       $content = $this->printContent($news);
-      // echo '<br>';
+      echo '<br>';
       $date = $this->printDate($news);
       $arr = array(
         'title' => $title,
@@ -54,7 +54,7 @@ class vnnParser extends Parser {
 
     $q = $news->query("//*[@class='title f-22 c-3e']");
     $title = $q->item(0)->nodeValue;
-    // echo 'Title: '. $title;
+    echo 'Title: '. $title;
     return $title;
 
   }
@@ -64,7 +64,7 @@ class vnnParser extends Parser {
 
     $q = $news->query("//*[@class='ArticleContent']");
     $content = $q->item(0)->nodeValue;
-    // echo 'Content: '.$content;
+    echo 'Content: '.$content;
     return $content;
 
   }
@@ -77,8 +77,7 @@ class vnnParser extends Parser {
     preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
     preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
     $date = $day[0]. " " .$time[0];
-    var_dump($date);
-    // echo 'Date: '.$date;
+    echo 'Date: '.$date;
     return $date;
     
   }
@@ -103,7 +102,7 @@ class vneParser extends Parser {
 
     $q = $news->query("//*[@class='title-detail']");
     $title = $q->item(0)->nodeValue;
-    // echo 'Title: '. $title;
+    echo 'Title: '. $title;
     return $title;
 
   }
@@ -116,7 +115,7 @@ class vneParser extends Parser {
     foreach ($q as $s) {
       $content .= $s->nodeValue;
     }
-    // var_dump($content);
+    echo 'Content:' . $content;
     return $content;
     
   }
@@ -129,8 +128,7 @@ class vneParser extends Parser {
     preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
     preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
     $date = $day[0]. " " .$time[0];
-    var_dump($date);
-    // echo 'Date: '.$date;
+    echo 'Date: '.$date;
     return $date;
   }
 
@@ -154,7 +152,7 @@ class dtParser extends Parser {
 
     $q = $news->query("//*[@class='dt-news__title']");
     $title = $q->item(0)->nodeValue;
-    // echo 'Title: '. $title;
+    echo 'Title: '. $title;
     return $title;
 
   }
@@ -164,7 +162,7 @@ class dtParser extends Parser {
 
     $q = $news->query("//*[@class='dt-news__content']");
     $content = $q->item(0)->nodeValue;
-    // echo 'Content: '.$content;
+    echo 'Content: '.$content;
     return $content;
 
   }
@@ -177,8 +175,7 @@ class dtParser extends Parser {
     preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
     preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
     $date = $day[0]. " " .$time[0];
-    var_dump($date);
-    // echo 'Date: '.$date;
+    echo 'Date: '.$date;
     return $date;
     
   }

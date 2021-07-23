@@ -9,11 +9,12 @@ class DB {
 
   protected function connect() {
       $this->server = 'localhost';
-      $this->username = 'root';
-      $this->password = '';
+      $this->username = 'hungphqu';
+      $this->password = '12345';
       $this->dbname = 'newsdb';
 
       $conn = new mysqli($this->server, $this->username, $this->password, $this->dbname);
+      $conn -> set_charset("utf8");
       return $conn;
     }
 
@@ -36,9 +37,14 @@ class Data extends DB {
   public function insert($data) {
     $string = "INSERT INTO news (" . implode(",",array_keys($data)) . ") VALUES ('" . implode("','", array_values($data)) . "')";
     if (mysqli_query($this->connect(),$string)) {
+      echo "<br>";
+      echo "<strong>Data added to database!</strong>";
       return true;
     } else {
-      echo mysqli_error($this->connect());
+      echo "Wrong";
+      echo $this->connect()->connect_error;
+      echo $this->connect->connect_error;
+      echo $this->connect->error;
     }
   }
 }

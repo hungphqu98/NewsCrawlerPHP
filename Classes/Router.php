@@ -31,7 +31,6 @@ class Router {
         $parse = new vnnParser($curl);
         $array = $parse->printParse();
         return $array;
-
       } else if (empty($url)){
         echo '<pre>';
         echo "No URl sent";
