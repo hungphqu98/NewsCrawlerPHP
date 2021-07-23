@@ -26,9 +26,12 @@
     // Print content
     public function printContent($news) {
   
-      $q = $news->query("//*[@class='ArticleContent']");
-      $content = $q->item(0)->nodeValue;
-      echo 'Content: '.$content;
+      $q = $news->query("//*[@class='ArticleContent']/p");
+      $content = '';
+      foreach ($q as $s) {
+        $content .= $s->nodeValue;
+      }
+      echo 'Content:' . $content;
       return $content;
   
     }

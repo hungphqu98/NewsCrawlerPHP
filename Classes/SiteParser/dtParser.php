@@ -13,10 +13,6 @@
       
     }
 
-    public function call() {
-      echo "34342";
-    }
-
     // Print title
     public function printTitle($news) {
 

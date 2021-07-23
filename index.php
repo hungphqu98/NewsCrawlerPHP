@@ -25,19 +25,20 @@
   <?php 
 
   if ($_POST) {
-  $data = new Query();
+  
   $curl = new Curl();
   $curl->init();
   $curl->getUrl($_POST['url'])->method('GET')->setOptArray();
+  $curl->exec();
+
   $router = new Router($curl);
   $result = $router->routing();
-  echo "<pre>";
-  var_dump($result);
-  echo "</pre>";
-
+  
+  $data = new Query();
   $data->insert($result);
   
   $curl->close();
+
   }
   ?>
 

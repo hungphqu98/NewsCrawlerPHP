@@ -16,10 +16,6 @@ class Router {
   // Route action based on sites
   function routing() {
 
-    // global $curl;
-
-    $this->curl->exec();
-
     $url = $this->curl->getInfo()["url"];
 
      if (preg_match('/dantri/',$url)) {

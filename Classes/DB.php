@@ -20,6 +20,7 @@ class DB {
         exit();
       }
       $conn -> set_charset("utf8");
+
       return $conn;
     }
 

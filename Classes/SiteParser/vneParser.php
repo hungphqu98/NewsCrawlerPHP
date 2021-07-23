@@ -27,7 +27,7 @@
    public function printContent($news) {
  
      $q = $news->query("//*[@class='Normal']");
-     $content = $q[0]->nodeValue;
+     $content = '';
      foreach ($q as $s) {
        $content .= $s->nodeValue;
      }
