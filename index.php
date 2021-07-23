@@ -1,8 +1,5 @@
 <?php 
-  require 'Classes/DB.php';
-  require 'Classes/Curl.php';
-  require 'Classes/Parser.php';
-  require 'Classes/Router.php';
+  require 'Classes/autoload.php';
 ?>
 
 <!DOCTYPE html>
@@ -28,14 +25,15 @@
   <?php 
 
   if ($_POST) {
-  $data = new Data();
+  $data = new Query();
   $curl = new Curl();
   $curl->init();
   $curl->getUrl($_POST['url'])->method('GET')->setOptArray();
-
-  $parse = new Parser($curl);
-  $router = new Router($parse, $curl);
+  $router = new Router($curl);
   $result = $router->routing();
+  echo "<pre>";
+  var_dump($result);
+  echo "</pre>";
 
   $data->insert($result);
   
