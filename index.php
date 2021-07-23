@@ -29,13 +29,12 @@
   // Start curl
   $curl = new Curl();
   $curl->get();
-  echo "<pre>";
-  // var_dump($value);
-  echo "</pre>";
-    
+  
+  // Parse data
   $router = new Router($curl);
   $result = $router->routing();
   
+  // Insert parsed data to db
   $data = new Query();
   $data->insert($result);
   
