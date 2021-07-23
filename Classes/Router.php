@@ -2,9 +2,9 @@
 
 class Router {
 
-  private $curl;
+  public $curl;
 
-  function __construct(Curl $curl) {
+  public function __construct(Curl $curl) {
 
     $this->curl = $curl;
     if(!$curl){
@@ -14,7 +14,7 @@ class Router {
   }
 
   // Route action based on URL
-  function routing() {
+  public function routing() {
 
     $url = $this->curl->getInfo()["url"];
 
@@ -34,7 +34,7 @@ class Router {
         echo '</pre>';
       }
 
-      $result = $parser->printParse();
+      $result = $parser->getParse();
       return $result;
   }
 

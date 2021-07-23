@@ -2,7 +2,7 @@
 
   class vnnParser extends Parser {
   
-    // Parse data from HTML
+    // Parse page data from HTML
     public function htmlParse() {
   
       $html = $this->curl->exec();
@@ -13,8 +13,8 @@
       
     }
   
-    // Print title
-    public function printTitle($news) {
+    // get title
+    public function getTitle($news) {
   
       $q = $news->query("//*[@class='title f-22 c-3e']");
       $title = $q->item(0)->nodeValue;
@@ -23,8 +23,8 @@
   
     }
   
-    // Print content
-    public function printContent($news) {
+    // get content
+    public function getContent($news) {
   
       $q = $news->query("//*[@class='ArticleContent']/p");
       $content = '';
@@ -36,8 +36,8 @@
   
     }
   
-    // Print published date
-    public function printDate($news) {
+    // get published date
+    public function getDate($news) {
   
       $q = $news->query("//*[@class='ArticleDate']");
       $dateString = $q->item(0)->nodeValue;

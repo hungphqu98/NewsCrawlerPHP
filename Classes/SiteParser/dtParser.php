@@ -2,7 +2,7 @@
 
   class dtParser extends Parser {
 
-    // Parse data from html
+    // Parse page data from html
     public function htmlParse() {
 
       $html = $this->curl->exec();
@@ -13,8 +13,8 @@
       
     }
 
-    // Print title
-    public function printTitle($news) {
+    // get title
+    public function getTitle($news) {
 
       $q = $news->query("//*[@class='dt-news__title']");
       $titles = $q->item(0)->nodeValue;
@@ -25,8 +25,8 @@
 
     }
 
-    // Print content
-    public function printContent($news) {
+    // get content
+    public function getContent($news) {
 
       $q = $news->query("//*[@class='dt-news__content']/p");
       $content = '';
@@ -38,8 +38,8 @@
 
     }
 
-    // Print published date
-    public function printDate($news) {
+    // get published date
+    public function getDate($news) {
 
       $q = $news->query("//*[@class='dt-news__time']");
       $dateString = $q->item(0)->nodeValue;

@@ -26,11 +26,13 @@
 
   if ($_POST) {
   
+  // Start curl
   $curl = new Curl();
-  $curl->init();
-  $curl->getUrl($_POST['url'])->method('GET')->setOptArray();
-  $curl->exec();
-
+  $curl->get();
+  echo "<pre>";
+  // var_dump($value);
+  echo "</pre>";
+    
   $router = new Router($curl);
   $result = $router->routing();
   

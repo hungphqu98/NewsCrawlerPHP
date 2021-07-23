@@ -14,14 +14,14 @@ class Parser {
   }
 
    // Print parsed data 
-   public function printParse() {
+   public function getParse() {
 
       $news = $this->htmlParse();
-      $title = $this->printTitle($news);
+      $title = $this->getTitle($news);
       echo '<br>';
-      $content = $this->printContent($news);
+      $content = $this->getContent($news);
       echo '<br>';
-      $date = $this->printDate($news);
+      $date = $this->getDate($news);
       $arr = array(
         'title' => $title,
         'content' => $content,
@@ -30,6 +30,7 @@ class Parser {
       return $arr;
   }
 
+  // 
 
 }
 

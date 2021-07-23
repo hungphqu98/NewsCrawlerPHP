@@ -13,6 +13,7 @@ class Curl {
 
   public $curlInfo = [];
 
+  public $value = '';
 
   // Init curl
   public function init() {
@@ -60,6 +61,16 @@ class Curl {
 
   }
 
+  // Get data from curl request
+  public function get() {
+
+    $this->init();
+    $this->getUrl($_POST['url'])->method('GET')->setOptArray();
+    $value = $this->exec();
+    return $value;
+
+  }
+
   // Get info
   public function getInfo() {
 
@@ -69,32 +80,44 @@ class Curl {
 
   // Get version 
   public function version() {
+
     return curl_version();
+
   }
 
   // Return string error 
   public function strerror($errnum) {
+
     return curl_strerror($errnum);
+
   } 
 
   // Get last error number
   public function errno() {
+
     return curl_errno($this->handler);
+
   }
 
   // Get error 
   public function error() {
+
     return curl_error($this->handler);
+
   }
 
   // Get handler
   public function getHandler() {
+
     return $this->handler;
+
   }
 
   // Reset request 
   public function reset() {
+
     return curl_reset($this->handler);
+    
   }
 
   // Close request
