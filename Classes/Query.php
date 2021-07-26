@@ -2,18 +2,6 @@
 
 class Query extends DB {
 
-  public function getAll() {
-    $sql = "SELECT * FROM `news`";
-    $result = $this->connect()->query($sql);
-    $numRows = $result->num_rows;
-    if ($numRows > 0) {
-      while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-      }
-      return $data;
-    }
-  }
-
   // Insert to db
   public function insert($data) {
 

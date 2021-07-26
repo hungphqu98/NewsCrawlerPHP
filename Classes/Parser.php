@@ -1,6 +1,6 @@
 <?php 
 
-class Parser {
+abstract class Parser {
 
   protected $curl;
 
@@ -30,7 +30,20 @@ class Parser {
       return $arr;
   }
 
-  // 
+  // Parse page data from html
+  abstract public function htmlParse();
+
+  // get title
+  abstract public function getTitle($title);
+
+  // get content
+  abstract public function getContent($content);
+
+  // get published date
+  abstract public function getDate($date);
+
+
+
 
 }
 
