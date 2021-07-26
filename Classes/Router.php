@@ -2,7 +2,7 @@
 
 class Router {
 
-  public $curl;
+  private $curl;
 
   public function __construct(Curl $curl) {
 

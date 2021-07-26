@@ -13,8 +13,6 @@ class Curl {
 
   public $curlInfo = [];
 
-  public $value = '';
-
   // Init curl
   public function init() {
 
@@ -54,20 +52,18 @@ class Curl {
 
   }
 
-  // Exec 
-  public function exec() {
-
-    return curl_exec($this->handler);
-
-  }
-
   // Get data from curl request
   public function get() {
 
     $this->init();
     $this->getUrl($_POST['url'])->method('GET')->setOptArray();
-    $value = $this->exec();
-    return $value;
+
+  }
+
+  // Exec curl request
+  public function exec() {
+
+    return curl_exec($this->handler);
 
   }
 
