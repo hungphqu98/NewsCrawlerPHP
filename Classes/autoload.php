@@ -8,7 +8,7 @@
       'DB' => 'DB.php',
       'Query' => 'Query.php',
       'Curl' => 'Curl.php',
-      'Router' => 'Router.php',
+      'Parser' => 'Parser.php',
       'PageParser' => 'SubParser/PageParser.php',
       'dtParser' => 'SubParser/dtParser.php',
       'vneParser' => 'SubParser/vneParser.php',
