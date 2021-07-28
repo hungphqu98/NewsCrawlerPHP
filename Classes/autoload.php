@@ -8,11 +8,11 @@
       'DB' => 'DB.php',
       'Query' => 'Query.php',
       'Curl' => 'Curl.php',
-      'Parser' => 'Parser.php',
       'Router' => 'Router.php',
-      'dtParser' => 'SiteParser/dtParser.php',
-      'vneParser' => 'SiteParser/vneParser.php',
-      'vnnParser' => 'SiteParser/vnnParser.php'   
+      'PageParser' => 'SubParser/PageParser.php',
+      'dtParser' => 'SubParser/dtParser.php',
+      'vneParser' => 'SubParser/vneParser.php',
+      'vnnParser' => 'SubParser/vnnParser.php'   
     );
 
   if (!array_key_exists($name, $classes)) {
