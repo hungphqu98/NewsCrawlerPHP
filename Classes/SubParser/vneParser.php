@@ -1,6 +1,6 @@
 <?php 
   
-  class vneParser extends Parser {
+  class vneParser extends PageParser {
   
     // Parse page data from html
     public function htmlParse() {
