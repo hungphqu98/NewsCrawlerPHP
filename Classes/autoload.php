@@ -1,8 +1,8 @@
 <?php 
 
-  spl_autoload_register('AutoLoader');
+  spl_autoload_register('autoLoader');
 
-  function AutoLoader($name){
+  function autoLoader($name){
 
     $classes = array(
       'DB' => 'DB.php',
@@ -10,9 +10,9 @@
       'Curl' => 'Curl.php',
       'Parser' => 'Parser.php',
       'PageParser' => 'SubParser/PageParser.php',
-      'dtParser' => 'SubParser/dtParser.php',
-      'vneParser' => 'SubParser/vneParser.php',
-      'vnnParser' => 'SubParser/vnnParser.php'   
+      'DtParser' => 'SubParser/DtParser.php',
+      'VneParser' => 'SubParser/VneParser.php',
+      'VnnParser' => 'SubParser/VnnParser.php'   
     );
 
   if (!array_key_exists($name, $classes)) {
