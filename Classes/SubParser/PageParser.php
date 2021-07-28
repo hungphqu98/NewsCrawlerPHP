@@ -31,7 +31,15 @@ abstract class PageParser {
   }
 
   // Parse page data from html
-  abstract public function htmlParse();
+  public function htmlParse() {
+ 
+    $html = $this->curl->exec();
+    $dom = new DOMDocument();
+    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html,LIBXML_NOERROR);
+    $parse = new DOMXPath($dom);
+    return $parse;
+    
+  }
 
   // get title
   abstract public function getTitle($title);
