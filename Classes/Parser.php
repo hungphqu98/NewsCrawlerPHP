@@ -19,11 +19,11 @@ class Parser {
     $url = $this->curl->getInfo()["url"];
 
      if (preg_match('/dantri/',$url)) {
-        $parser = new dtParser($this->curl);
+        $parser = new DtParser($this->curl);
       } else if (preg_match('/vnexpress/',$url)) {
-        $parser = new vneParser($this->curl);
+        $parser = new VneParser($this->curl);
       } else if (preg_match('/vietnamnet/',$url)) {
-        $parser = new vnnParser($this->curl);
+        $parser = new VnnParser($this->curl);
       } else if (empty($url)){
         echo '<pre>';
         echo "No URl sent";
