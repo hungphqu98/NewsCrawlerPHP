@@ -82,14 +82,14 @@ class Curl {
   }
 
   // Return string error 
-  public function strerror($errnum) {
+  public function strError($errnum) {
 
     return curl_strerror($errnum);
 
   } 
 
   // Get last error number
-  public function errno() {
+  public function errNo() {
 
     return curl_errno($this->handler);
 
