@@ -31,8 +31,8 @@
   $curl->get();
   
   // Parse data
-  $router = new Router($curl);
-  $result = $router->routing();
+  $parser = new Parser($curl);
+  $result = $parser->parse();
   
   // Insert parsed data to db
   $data = new Query();
