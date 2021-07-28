@@ -1,17 +1,6 @@
 <?php 
 
-  class vnnParser extends PageParser {
-  
-    // Parse page data from HTML
-    public function htmlParse() {
-  
-      $html = $this->curl->exec();
-      $dom = new DOMDocument();
-      $dom->loadHTML($html,LIBXML_NOERROR);
-      $parse = new DOMXPath($dom);
-      return $parse;
-      
-    }
+  class VnnParser extends PageParser {
   
     // get title
     public function getTitle($news) {
