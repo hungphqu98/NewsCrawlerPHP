@@ -1,17 +1,6 @@
 <?php 
 
-  class dtParser extends PageParser {
-
-    // Parse page data from html
-    public function htmlParse() {
-
-      $html = $this->curl->exec();
-      $dom = new DOMDocument();
-      $dom->loadHTML($html,LIBXML_NOERROR);
-      $parse = new DOMXPath($dom);
-      return $parse;
-      
-    }
+  class DtParser extends PageParser {
 
     // get title
     public function getTitle($news) {
