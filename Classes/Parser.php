@@ -1,6 +1,6 @@
 <?php 
 
-abstract class Parser {
+abstract class PageParser {
 
   protected $curl;
 
