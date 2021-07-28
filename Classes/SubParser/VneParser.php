@@ -1,17 +1,6 @@
 <?php 
   
-  class vneParser extends PageParser {
-  
-    // Parse page data from html
-    public function htmlParse() {
- 
-     $html = $this->curl->exec();
-     $dom = new DOMDocument();
-     $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html,LIBXML_NOERROR);
-     $parse = new DOMXPath($dom);
-     return $parse;
-     
-   }
+  class VneParser extends PageParser {
  
    // get title
    public function getTitle($news) {
