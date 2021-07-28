@@ -1,6 +1,6 @@
 <?php 
 
-  class dtParser extends Parser {
+  class dtParser extends PageParser {
 
     // Parse page data from html
     public function htmlParse() {
