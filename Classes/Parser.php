@@ -14,7 +14,7 @@ class Router {
   }
 
   // Route action based on URL
-  public function routing() {
+  public function parse() {
 
     $url = $this->curl->getInfo()["url"];
 
