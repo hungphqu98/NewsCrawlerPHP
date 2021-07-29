@@ -31,6 +31,7 @@ class Curl {
   
   // Request method
   public function method($method = 'GET') {
+    
     $this->method = $method;
     if ($method != 'GET') {
       echo '<pre>';
