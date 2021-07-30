@@ -5,27 +5,24 @@
     // get title
     protected function getTitle($news) {
 
-      $data = $news->query("//*[@class='dt-news__title']");
-      $title = $this->formatTitle($data);
-      return $this->title = $title;
+      $dataTitle = $news->query("//*[@class='dt-news__title']");
+      return $this->dataTitle = $dataTitle;
 
     }
 
     // get content
     protected function getContent($news) {
 
-      $data = $news->query("//*[@class='dt-news__content']/p");
-      $content = $this->formatContent($data);
-      return $this->content = $content;
+      $dataContent = $news->query("//*[@class='dt-news__content']/p");
+      return $this->dataContent = $dataContent;
 
     }
 
     // get published date
     protected function getDate($news) {
 
-      $data = $news->query("//*[@class='dt-news__time']");
-      $date = $this->formatDate($data);
-      return $this->date = $date;
+      $dataDate = $news->query("//*[@class='dt-news__time']");
+      return $this->dataDate = $dataDate;
       
     }
 

@@ -4,11 +4,17 @@ abstract class PageParser {
 
   protected $curl;
 
-  public $title = '';
+  protected $dataTitle = '';
 
-  public $content = '';
+  protected $dataContent = '';
 
-  public $date = '';
+  protected $dataDate = '';
+
+  protected $title;
+
+  protected $content;
+
+  protected $date;
 
     public function __construct(Curl $curl) {
 
@@ -24,15 +30,18 @@ abstract class PageParser {
 
         $news = $this->htmlParse();
         $title = $this->getTitle($news);
+        $formattedTitle = $this->formatTitle($title);
         $content = $this->getContent($news);
+        $formattedContent = $this->formatContent($content);
         $date = $this->getDate($news);
-
-        $arr = array(
-          'title' => $title,
-          'content' => $content,
-          'date' => $date
+        $formattedDate = $this->formatDate($date);
+        $result = array(
+          'title' => $formattedTitle,
+          'content' => $formattedContent,
+          'date' => $formattedDate
         );
-        return $arr;
+        return $result;
+
     }
 
     // Parse page data from html
@@ -47,43 +56,43 @@ abstract class PageParser {
     }
 
     // get title
-    abstract protected function getTitle($title);
+    abstract protected function getTitle($news);
 
     // get content
-    abstract protected function getContent($content);
+    abstract protected function getContent($news);
 
     // get published date
-    abstract protected function getDate($date);
+    abstract protected function getDate($news);
 
     // format title 
-    protected function formatTitle($data) {
+    protected function formatTitle($dataTitle) {
 
-      $titles = $data->item(0)->nodeValue;
+      $titles = $dataTitle->item(0)->nodeValue;
       $titles = preg_replace('/\s+/', ' ', $titles);
       $title = trim($titles," ");
-      return $title;
+      return $this->title = $title;
 
     }
 
     // format content
-    protected function formatContent($data) {
+    protected function formatContent($dataContent) {
       
       $content = '';
-      foreach ($data as $line) {
+      foreach ($dataContent as $line) {
         $content .= $line->nodeValue;
       }
-      return $content;
+      return $this->content = $content;
 
     }
 
     // format date 
-    protected function formatDate($data) {
+    protected function formatDate($dataDate) {
 
-      $dateString = $data->item(0)->nodeValue;
+      $dateString = $dataDate->item(0)->nodeValue;
       preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
       preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
       $date = $day[0]. " " .$time[0];
-      return $date;
+      return $this->date = $date;
 
     }
 
