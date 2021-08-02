@@ -27,13 +27,13 @@
   if ($_POST) {
   
   // Start curl
-  $curl = new Curl();
+  $curl = new Classes\Curl();
   $curl->get();
   
   // Parse data
-  $parser = new Parser($curl);
+  $parser = new Classes\Parser($curl);
   $result = $parser->parse();
-  
+  var_dump($result);
   // Insert parsed data to db
   $data = new Query();
   $data->insert($result);

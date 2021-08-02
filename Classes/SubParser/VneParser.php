@@ -1,5 +1,6 @@
 <?php 
-  
+  namespace SubParser;
+
   class VneParser extends PageParser {
     
     // get title

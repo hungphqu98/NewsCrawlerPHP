@@ -1,4 +1,5 @@
 <?php 
+namespace SubParser;
 
 abstract class PageParser {
 
@@ -16,7 +17,7 @@ abstract class PageParser {
 
   protected $date;
 
-    public function __construct(Curl $curl) {
+    public function __construct(\Classes\Curl $curl) {
 
       $this->curl = $curl;
       if(!$curl){
@@ -29,12 +30,14 @@ abstract class PageParser {
     public function getParse() {
 
         $news = $this->htmlParse();
+
         $title = $this->getTitle($news);
         $formattedTitle = $this->formatTitle($title);
         $content = $this->getContent($news);
         $formattedContent = $this->formatContent($content);
         $date = $this->getDate($news);
         $formattedDate = $this->formatDate($date);
+
         $result = array(
           'title' => $formattedTitle,
           'content' => $formattedContent,

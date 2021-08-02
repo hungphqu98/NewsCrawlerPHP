@@ -5,14 +5,11 @@
   function autoLoader($name){
 
     $classes = array(
-      'DB' => 'DB.php',
-      'Query' => 'Query.php',
+      'DB' => '../Config/DB.php',
+      'Query' => '../Config/Query.php',
       'Curl' => 'Curl.php',
       'Parser' => 'Parser.php',
       'PageParser' => 'SubParser/PageParser.php',
-      'DtParser' => 'SubParser/DtParser.php',
-      'VneParser' => 'SubParser/VneParser.php',
-      'VnnParser' => 'SubParser/VnnParser.php'   
     );
 
   if (!array_key_exists($name, $classes)) {

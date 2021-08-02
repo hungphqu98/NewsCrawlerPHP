@@ -1,4 +1,5 @@
 <?php 
+  namespace SubParser;
 
   class VnnParser extends PageParser {
   

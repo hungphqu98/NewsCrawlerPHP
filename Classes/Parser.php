@@ -19,10 +19,13 @@ class Parser {
     $url = $this->curl->getInfo()["url"];
 
      if (preg_match('/dantri/',$url)) {
+        require_once("SubParser/DtParser.php");
         $parser = new DtParser($this->curl);
       } else if (preg_match('/vnexpress/',$url)) {
+        require_once("SubParser/VneParser.php");
         $parser = new VneParser($this->curl);
       } else if (preg_match('/vietnamnet/',$url)) {
+        require_once("SubParser/VnnParser.php");
         $parser = new VnnParser($this->curl);
       } else if (empty($url)){
         echo '<pre>';

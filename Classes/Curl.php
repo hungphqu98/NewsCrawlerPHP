@@ -1,6 +1,5 @@
 <?php
 
-
 class Curl {
 
   public $handler = null;

@@ -1,4 +1,5 @@
 <?php 
+  namespace SubParser;
 
   class DtParser extends PageParser {
 
