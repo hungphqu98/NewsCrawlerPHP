@@ -1,5 +1,5 @@
 <?php 
-  namespace SubParser;
+  namespace Classes\SubParser;
 
   class VneParser extends PageParser {
     
