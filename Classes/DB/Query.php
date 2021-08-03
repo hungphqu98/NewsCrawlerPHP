@@ -5,7 +5,7 @@ namespace DB;
  * This is the query class for database interaction
  */
 class Query extends DB {
-
+  
   /**
    * Insert to DB using an array data
    */
