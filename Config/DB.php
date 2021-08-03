@@ -1,20 +1,12 @@
 <?php 
+namespace Config;
 
 class DB {
 
-  private $server;
-  private $username;
-  private $password;
-  private $dbname;
-
   // Connect to database 
   protected function connect() {
-      $this->server = 'localhost';
-      $this->username = 'hungphqu';
-      $this->password = '12345';
-      $this->dbname = 'newsdb';
-
-      $conn = new mysqli($this->server, $this->username, $this->password, $this->dbname);
+      
+      $conn = new \mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
       if ($conn -> connect_errno) {
         echo "Failed to connect to MySQL: " . $conn -> connect_error;
         exit();

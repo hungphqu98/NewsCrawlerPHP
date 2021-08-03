@@ -35,7 +35,7 @@
   $result = $parser->parse();
   var_dump($result);
   // Insert parsed data to db
-  $data = new Query();
+  $data = new Config\Query();
   $data->insert($result);
   
   $curl->close();

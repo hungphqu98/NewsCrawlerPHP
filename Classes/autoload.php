@@ -1,22 +1,12 @@
 <?php 
-
-  spl_autoload_register('autoLoader');
-
-  function autoLoader($name){
-
-    $classes = array(
-      'DB' => '../Config/DB.php',
-      'Query' => '../Config/Query.php',
-      'Curl' => 'Curl.php',
-      'Parser' => 'Parser.php',
-      'PageParser' => 'SubParser/PageParser.php',
-    );
-
-  if (!array_key_exists($name, $classes)) {
-      die('Class "' . $name . '" not found.');
+define('ROOT_URI', 'E:\Programming\xampps\htdocs\NewsCrawlerPHP\\');
+spl_autoload_register(function ($class) {
+  $file = ROOT_URI. str_replace('\\', '/', $class) .'.php';
+  if (file_exists($file)) {
+      require $file;
+  } else {
+    echo $file;
   }
-  require_once $classes[$name];
-
-  }
+});
 
 ?>

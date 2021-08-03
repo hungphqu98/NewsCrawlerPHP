@@ -5,11 +5,11 @@ abstract class PageParser {
 
   protected $curl;
 
-  protected $dataTitle = '';
+  protected $titleQuery = "";
 
-  protected $dataContent = '';
+  protected $contentQuery = "";
 
-  protected $dataDate = '';
+  protected $dateQuery = "";
 
   protected $title;
 
@@ -32,16 +32,13 @@ abstract class PageParser {
         $news = $this->htmlParse();
 
         $title = $this->getTitle($news);
-        $formattedTitle = $this->formatTitle($title);
         $content = $this->getContent($news);
-        $formattedContent = $this->formatContent($content);
         $date = $this->getDate($news);
-        $formattedDate = $this->formatDate($date);
 
         $result = array(
-          'title' => $formattedTitle,
-          'content' => $formattedContent,
-          'date' => $formattedDate
+          'title' => $title,
+          'content' => $content,
+          'date' => $date
         );
         return $result;
 
@@ -51,52 +48,40 @@ abstract class PageParser {
     public function htmlParse() {
   
       $html = $this->curl->exec();
-      $dom = new DOMDocument();
+      $dom = new \DOMDocument();
       $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html,LIBXML_NOERROR);
-      $parse = new DOMXPath($dom);
+      $parse = new \DOMXPath($dom);
       return $parse;
       
     }
 
     // get title
-    abstract protected function getTitle($news);
-
-    // get content
-    abstract protected function getContent($news);
-
-    // get published date
-    abstract protected function getDate($news);
-
-    // format title 
-    protected function formatTitle($dataTitle) {
-
+    protected function getTitle($news) {
+      $dataTitle = $news->query($this->titleQuery);
       $titles = $dataTitle->item(0)->nodeValue;
       $titles = preg_replace('/\s+/', ' ', $titles);
       $title = trim($titles," ");
       return $this->title = $title;
-
     }
 
-    // format content
-    protected function formatContent($dataContent) {
-      
+    // get content
+    protected function getContent($news) {
+      $dataContent = $news->query($this->contentQuery);
       $content = '';
       foreach ($dataContent as $line) {
         $content .= $line->nodeValue;
       }
       return $this->content = $content;
-
     }
 
-    // format date 
-    protected function formatDate($dataDate) {
-
+    // get published date
+    protected function getDate($news) {
+      $dataDate = $news->query($this->dateQuery);
       $dateString = $dataDate->item(0)->nodeValue;
       preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
       preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
       $date = $day[0]. " " .$time[0];
       return $this->date = $date;
-
     }
 
 
