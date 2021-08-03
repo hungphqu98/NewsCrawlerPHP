@@ -1,4 +1,5 @@
 <?php 
+  require 'Config/Config.php';
   require 'Classes/autoload.php';
 ?>
 
@@ -34,8 +35,9 @@
   $parser = new Classes\Parser($curl);
   $result = $parser->parse();
   var_dump($result);
+  
   // Insert parsed data to db
-  $data = new Config\Query();
+  $data = new DB\Query();
   $data->insert($result);
   
   $curl->close();

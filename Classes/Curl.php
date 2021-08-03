@@ -1,19 +1,33 @@
 <?php
 namespace Classes;
 
-class Curl {
+/**
+ * This is the Curl wrapper class
+ * @package curl
+ */
 
+class Curl {
+  /**
+   * @var null curl handler
+   */
   public $handler = null;
 
+  /**
+   * @var string curl url
+   */
   public $url = '';
 
+  /**
+   * Default curl request method is GET in this example
+   * @var string
+   */
   public $method = 'GET';
 
-  public $curlContent;
 
-  public $curlInfo = [];
-
-  // Init curl
+  
+  /**
+   * Initialize a Curl object
+   */
   public function init() {
 
     if ($this->handler == null) {
@@ -22,14 +36,22 @@ class Curl {
 
   }
 
-  // Get url
+  /**
+   * Return url of current Curl request
+   * 
+   * @return string
+   */
   public function getUrl($url='') {
     $this->url = $url;
     return $this;
 
   }
   
-  // Request method
+  /**
+   * Change curl request method. Restricted to GET for this project
+   * 
+   * @return string
+   */
   public function method($method = 'GET') {
     
     $this->method = $method;
@@ -42,7 +64,11 @@ class Curl {
 
   }
 
-  // Set request option
+  /**
+   * Set Curl request option, including url,method
+   * 
+   * @return array
+   */
   public function setOptArray() {
     
     return curl_setopt_array($this->handler,[
@@ -53,7 +79,10 @@ class Curl {
 
   }
 
-  // Get data from curl request
+  /**
+   * Get data from curl request
+   * 
+   */
   public function get() {
 
     $this->init();
@@ -61,63 +90,93 @@ class Curl {
 
   }
 
-  // Exec curl request
+  /**
+   * Perform a Curl session
+   * 
+   * @return boolean|string
+   */
   public function exec() {
 
     return curl_exec($this->handler);
 
   }
 
-  // Get info
+  /** 
+   * Get curl request information
+   * 
+   * @return array
+   */ 
   public function getInfo() {
 
     return curl_getinfo($this->handler);
 
   }
 
-  // Get version 
+  /**
+   * Get curl version
+   * 
+   * @return array|false
+   */
   public function version() {
 
     return curl_version();
 
   }
 
-  // Return string error 
+  /**
+   * Return curl error code
+   * 
+   * @return string
+   */
   public function strError($errnum) {
 
     return curl_strerror($errnum);
 
   } 
 
-  // Get last error number
+  /**
+   * Return last error number
+   * 
+   * @return int
+   */
   public function errNo() {
 
     return curl_errno($this->handler);
 
   }
 
-  // Get error 
+  /**
+   * Return curl error
+   * 
+   * @return string
+   */
   public function error() {
 
     return curl_error($this->handler);
 
   }
 
-  // Get handler
+  /**
+   * Get curl handler
+   */
   public function getHandler() {
 
     return $this->handler;
 
   }
 
-  // Reset request 
+  /**
+   * Reset curl request
+   */
   public function reset() {
 
     return curl_reset($this->handler);
     
   }
 
-  // Close request
+  /**
+   * Close curl request
+   */
   public function close() {
 
     curl_close($this->handler);

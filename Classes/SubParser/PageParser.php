@@ -1,6 +1,10 @@
 <?php 
 namespace Classes\SubParser;
 
+/**
+ * This is the abstract PageParser class. Other subparser class extend this class. 
+ * This class is used to parse data
+ */
 abstract class PageParser {
 
   protected $curl;
@@ -17,72 +21,121 @@ abstract class PageParser {
 
   protected $date;
 
-    public function __construct(\Classes\Curl $curl) {
+  /**
+   * Use an instance of Curl when construct the page parser
+   */
+  public function __construct(\Classes\Curl $curl) {
 
-      $this->curl = $curl;
-      if(!$curl){
-        throw new \Exception('Can not construct parser');
-      }
-
+    $this->curl = $curl;
+    if(!$curl){
+      throw new \Exception('Can not construct page parser');
     }
 
-    // Print parsed data 
-    public function getParse() {
+  }
 
-        $news = $this->htmlParse();
-
-        $title = $this->getTitle($news);
-        $content = $this->getContent($news);
-        $date = $this->getDate($news);
-
-        $result = array(
-          'title' => $title,
-          'content' => $content,
-          'date' => $date
-        );
-        return $result;
-
-    }
+  /**
+   * Get parsed data of title,content,date and store result in an array
+   * 
+   * @return array
+   */
+  public function getParse() {
 
     // Parse page data from html
-    public function htmlParse() {
-  
-      $html = $this->curl->exec();
-      $dom = new \DOMDocument();
-      $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html,LIBXML_NOERROR);
-      $parse = new \DOMXPath($dom);
-      return $parse;
-      
+    $news = $this->htmlParse();
+
+    // Get title,content,data data
+    $title = $this->getTitle($news);
+    $content = $this->getContent($news);
+    $date = $this->getDate($news);
+
+    // Create a result array from the data and return it
+    $result = array(
+      'title' => $title,
+      'content' => $content,
+      'date' => $date
+    );
+    return $result;
+
+  }
+
+  /**
+   * Create a DOMDocument to retrieve XML & HTML data to parse with PHP and return a DomXPath object
+   * 
+   * @return DomXPath object
+   */
+  public function htmlParse() {
+
+    // Execute curl request
+    $html = $this->curl->exec();
+
+    // Create a DomDocument 
+    $dom = new \DOMDocument();
+    $dom->loadHTML('<?xml encoding="utf-8" ?>' . $html,LIBXML_NOERROR);
+
+    // Return a DOMXPath object
+    $parse = new \DOMXPath($dom);
+    return $parse;
+    
+  }
+
+  /**
+   * Get and format title from query data
+   * 
+   * @return string
+   */
+  protected function getTitle($news) {
+
+    $dataTitle = $news->query($this->titleQuery);
+    $titles = $dataTitle->item(0)->nodeValue;
+
+    // Remove whitespace if present
+    $titles = preg_replace('/\s+/', ' ', $titles);
+
+    // Escape single quotes
+    $titles = str_replace("'", "\'", $titles);
+
+    $title = trim($titles," ");
+
+    return $this->title = $title;
+
+  }
+
+  /**
+   * Get and format content from query data
+   * 
+   * @return string
+   */
+  protected function getContent($news) {
+    $dataContent = $news->query($this->contentQuery);
+
+    // Join data from different lines
+    $content = '';
+    foreach ($dataContent as $line) {
+      $content .= $line->nodeValue;
     }
 
-    // get title
-    protected function getTitle($news) {
-      $dataTitle = $news->query($this->titleQuery);
-      $titles = $dataTitle->item(0)->nodeValue;
-      $titles = preg_replace('/\s+/', ' ', $titles);
-      $title = trim($titles," ");
-      return $this->title = $title;
-    }
+    // Escape single quotes
+    $content = str_replace("'", "\'", $content);
 
-    // get content
-    protected function getContent($news) {
-      $dataContent = $news->query($this->contentQuery);
-      $content = '';
-      foreach ($dataContent as $line) {
-        $content .= $line->nodeValue;
-      }
-      return $this->content = $content;
-    }
+    return $this->content = $content;
+  }
 
-    // get published date
-    protected function getDate($news) {
-      $dataDate = $news->query($this->dateQuery);
-      $dateString = $dataDate->item(0)->nodeValue;
-      preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
-      preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
-      $date = $day[0]. " " .$time[0];
-      return $this->date = $date;
-    }
+  /**
+   * Get and format content from query data
+   * 
+   * @return string 
+   */
+  protected function getDate($news) {
+    $dataDate = $news->query($this->dateQuery);
+    $dateString = $dataDate->item(0)->nodeValue;
+
+    // Get only date & time data from string
+    preg_match('^\\d{1,2}/\\d{1,2}/\\d{4}^',$dateString,$day);
+    preg_match('^\\d{1,2}:\\d{1,2}^',$dateString,$time);
+    $date = $day[0]. " " .$time[0];
+
+    return $this->date = $date;
+  }
 
 
 }
