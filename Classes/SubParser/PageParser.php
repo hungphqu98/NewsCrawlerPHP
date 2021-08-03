@@ -7,18 +7,39 @@ namespace Classes\SubParser;
  */
 abstract class PageParser {
 
+  /**
+   * @var Curl
+   */
   protected $curl;
 
+  /**
+   * @var string title query
+   */
   protected $titleQuery = "";
 
+  /**
+   * @var string content query
+   */
   protected $contentQuery = "";
 
+  /**
+   * @var string date query
+   */
   protected $dateQuery = "";
 
+  /**
+   * @var string parsed title
+   */
   protected $title;
 
+  /**
+   * @var string parsed content
+   */
   protected $content;
 
+  /**
+   * @var string parsed date
+   */
   protected $date;
 
   /**
